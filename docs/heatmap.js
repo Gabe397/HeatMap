@@ -1,9 +1,12 @@
-const width = 2600;
-const height= 500;
+const width = 1000;
+const height= 3100;
 
 
 var name = "name";
 var rating = "rating";
+
+var qualityLength = 125;
+var cellSize = 21;
 
 //Import the CSV File
 d3.csv("cereals.csv", function(cereals){
@@ -17,7 +20,7 @@ d3.csv("cereals.csv", function(cereals){
     });
     //Puts both attributes in separate arrays.
     let cerealName = cereals.map((d)=>{return d[name]});
-    let cerealRating = cereals.map((d)=> {return d[rating]});
+    let cerealRating = cereals.map((d)=> {return parseFloat(d[rating])});
 
     //This removes the first object in the data array so that all we have is data.
     data.shift();
@@ -25,16 +28,27 @@ d3.csv("cereals.csv", function(cereals){
     cerealRating.shift();
 
 
-
     //Make the Axis for the Names
-    let svg = d3.select("svg").attr("height", height).attr("width",width);
+    let svg = d3.select("svg").attr("height", height).attr("width",width).attr("transform","translate(200,-190)");
 
 
-    let xScale = d3.scaleBand().domain(cerealName).range([0,width]);
-    let xAxis = d3.axisTop().scale(xScale).tickSizeInner(20);
+    let yScale = d3.scaleBand().domain(cerealName).range([0,height]);
+    let yAxis = d3.axisLeft().scale(yScale);
     svg.append("g")
-        .call(xAxis)
-        .attr("transform","translate(10,200)");
+        .call(yAxis)
+        .attr("transform","translate(10,225)");
+
+    //Make the quality Axis
+    let xScale = d3.scaleBand().domain(["Quality"]);
+    let xAxis = d3.axisTop().scale(xScale);
+    svg.append("g").call(xAxis).attr("transform","translate(12,225)");
+
+
+
+    //Make Color Scale
+    let colorScale = d3.scaleThreshold().domain([d3.min(cerealRating), d3.max(cerealRating)]).range([d3.rgb("#FF0000"), d3.rgb("#008000")]);
+
+    //
 
 
 });
