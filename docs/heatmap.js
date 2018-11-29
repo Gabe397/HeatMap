@@ -14,8 +14,8 @@ d3.csv("cereals.csv", function(cereals){
     //data is the array of objects that have name and the rating.
     let data = cereals.map((d)=>{
         return{
-            x: d[name],
-            y: parseFloat(d[rating])
+            y: d[name],
+            x: parseFloat(d[rating])
         };
     });
     //Puts both attributes in separate arrays.
@@ -48,7 +48,20 @@ d3.csv("cereals.csv", function(cereals){
     //Make Color Scale
     let colorScale = d3.scaleThreshold().domain([d3.min(cerealRating), d3.max(cerealRating)]).range([d3.rgb("#FF0000"), d3.rgb("#008000")]);
 
-    //
+    //Make the Cells
+    let cell = svg.selectAll("rect").data(data);
+
+    cell.enter().append("g")
+                .append("rect")
+                .attr("class", "cell")
+                .attr("width",cellSize)
+                .attr("height",cellSize)
+                .attr("y",function(d){return yScale(d.y)})
+                .attr("x",120)
+                .attr("fill", function(d){return colorScale(d.x)})
+        .attr("transform", "translate(-90, 225)");
+
+
 
 
 });
