@@ -40,14 +40,14 @@ d3.csv("cereals.csv", function(cereals){
         .attr("transform","translate(150,50)");
 
     //Make the quality Axis
-    let xScale = d3.scaleBand().domain(["Quality"]).range([0,1000]);
+    let xScale = d3.scaleBand().domain(["Quality (Red = Min, Blue = Max)"]).range([0,1000]);
     let xAxis = d3.axisTop().scale(xScale);
     svg.append("g").call(xAxis).attr("transform","translate(150,48)");
 
 
 
     //Make Color Scale
-    let colorScale = d3.scaleLinear().domain([d3.min(cerealRating), d3.max(cerealRating)]).range(["black","red"]);
+    let colorScale = d3.scaleLinear().domain([d3.min(cerealRating), d3.max(cerealRating)]).range(["rgb(255,0,0)","rgb(0,0,255)" ]);
 
     //Make the Cells
     let cell = svg.selectAll("rect").data(data);
