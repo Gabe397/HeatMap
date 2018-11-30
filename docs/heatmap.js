@@ -1,12 +1,12 @@
-const width = 1000;
+const width = 1500;
 const height= 3000;
 
 
 var name = "name";
 var rating = "rating";
 
-var qualityLength = 125;
-var cellSize = 25;
+var cellSize = 40;
+var cellLength = 1000;
 
 //Import the CSV File
 d3.csv("cereals.csv", function(cereals){
@@ -28,25 +28,26 @@ d3.csv("cereals.csv", function(cereals){
     cerealRating.shift();
 
 
+    console.log(d3.max(cerealRating));
     //Make the Axis for the Names
-    let svg = d3.select("svg").attr("height", 3050).attr("width",width).attr("transform","translate(200,-190)");
+    let svg = d3.select("svg").attr("height", 3050).attr("width",width);
 
 
     let yScale = d3.scaleBand().domain(cerealName).range([0,height]);
     let yAxis = d3.axisLeft().scale(yScale);
     svg.append("g")
         .call(yAxis)
-        .attr("transform","translate(10,225)");
+        .attr("transform","translate(150,50)");
 
     //Make the quality Axis
-    let xScale = d3.scaleBand().domain(["Quality"]);
+    let xScale = d3.scaleBand().domain(["Quality"]).range([0,1000]);
     let xAxis = d3.axisTop().scale(xScale);
-    svg.append("g").call(xAxis).attr("transform","translate(12,225)");
+    svg.append("g").call(xAxis).attr("transform","translate(150,48)");
 
 
 
     //Make Color Scale
-    let colorScale = d3.scaleThreshold().domain([d3.min(cerealRating), d3.max(cerealRating)]).range(["#2980B9", "#E67E22", "#27AE60", "#27AE60"]);
+    let colorScale = d3.scaleLinear().domain([d3.min(cerealRating), d3.max(cerealRating)]).range(["black","red"]);
 
     //Make the Cells
     let cell = svg.selectAll("rect").data(data);
@@ -54,12 +55,11 @@ d3.csv("cereals.csv", function(cereals){
     cell.enter().append("g")
                 .append("rect")
                 .attr("class", "cell")
-                .attr("width",cellSize)
+                .attr("width",cellLength)
                 .attr("height",cellSize)
                 .attr("y",function(d){return yScale(d.y)})
-                .attr("x",120)
-                .attr("fill", function(d){return colorScale(d.x)})
-                .attr("transform", "translate(-90, 225)");
+                .attr("transform","translate(151.8,50)")
+                .attr("fill", function(d){return colorScale(d.x)});
 
 
 

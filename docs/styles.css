@@ -6,8 +6,17 @@
 
 #axis{
     shape-rendering: crispEdges;
+    padding-top: 20px;
+    padding-left:40px;
+
 }
 
+
+
+.domain{
+    stroke: black;
+    stroke-width: 2px;
+}
 h1{
     margin: 0px;
 }
