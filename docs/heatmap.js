@@ -1,12 +1,12 @@
 const width = 1000;
-const height= 3100;
+const height= 3000;
 
 
 var name = "name";
 var rating = "rating";
 
 var qualityLength = 125;
-var cellSize = 21;
+var cellSize = 25;
 
 //Import the CSV File
 d3.csv("cereals.csv", function(cereals){
@@ -29,7 +29,7 @@ d3.csv("cereals.csv", function(cereals){
 
 
     //Make the Axis for the Names
-    let svg = d3.select("svg").attr("height", height).attr("width",width).attr("transform","translate(200,-190)");
+    let svg = d3.select("svg").attr("height", 3050).attr("width",width).attr("transform","translate(200,-190)");
 
 
     let yScale = d3.scaleBand().domain(cerealName).range([0,height]);
@@ -46,7 +46,7 @@ d3.csv("cereals.csv", function(cereals){
 
 
     //Make Color Scale
-    let colorScale = d3.scaleThreshold().domain([d3.min(cerealRating), d3.max(cerealRating)]).range([d3.rgb("#FF0000"), d3.rgb("#008000")]);
+    let colorScale = d3.scaleThreshold().domain([d3.min(cerealRating), d3.max(cerealRating)]).range(["#2980B9", "#E67E22", "#27AE60", "#27AE60"]);
 
     //Make the Cells
     let cell = svg.selectAll("rect").data(data);
@@ -59,7 +59,7 @@ d3.csv("cereals.csv", function(cereals){
                 .attr("y",function(d){return yScale(d.y)})
                 .attr("x",120)
                 .attr("fill", function(d){return colorScale(d.x)})
-        .attr("transform", "translate(-90, 225)");
+                .attr("transform", "translate(-90, 225)");
 
 
 
