@@ -28,9 +28,9 @@ d3.csv("cereals.csv", function(cereals){
     cerealRating.shift();
 
 
-    console.log(d3.max(cerealRating));
+    console.log(d3.mean(cerealRating));
     //Make the Axis for the Names
-    let svg = d3.select("svg").attr("height", 3050).attr("width",width);
+    let svg = d3.select("#axis").attr("height", 3050).attr("width",width);
 
 
     let yScale = d3.scaleBand().domain(cerealName).range([0,height]);

@@ -11,12 +11,38 @@
 
 }
 
+h2{
+    margin: 0px;
+    width: 50px;
+}
+
+#min{
+    transform: translate(350px,-20px);
+}
+#max{
+    transform: translate(1000px,-155px);
+}
 
 
+#axis{
+    transform: translate(0px,-89px);
+}
+
+#container{
+    transform: translate(400px,-83px);
+    height: 100px;
+    width: 600px;
+    background-image: linear-gradient(to right, red , blue);
+}
+
+#header{
+    font-size: 70px;
+}
 .domain{
     stroke: black;
     stroke-width: 2px;
 }
 h1{
     margin: 0px;
+    width: 50px;
 }
