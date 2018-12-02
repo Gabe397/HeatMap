@@ -46,8 +46,11 @@ d3.csv("cereals.csv", function(cereals){
 
 
 
+    //Make Tooltips
+
+
     //Make Color Scale
-    let colorScale = d3.scaleLinear().domain([d3.min(cerealRating), d3.max(cerealRating)]).range(["rgb(255,0,0)","rgb(0,0,255)" ]);
+    let colorScale = d3.scaleLinear().domain([0, d3.max(cerealRating)]).range(["rgb(255,0,0)","rgb(0,0,255)" ]);
 
     //Make the Cells
     let cell = svg.selectAll("rect").data(data);
@@ -59,7 +62,9 @@ d3.csv("cereals.csv", function(cereals){
                 .attr("height",cellSize)
                 .attr("y",function(d){return yScale(d.y)})
                 .attr("transform","translate(151.8,50)")
-                .attr("fill", function(d){return colorScale(d.x)});
+                .attr("fill", function(d){return colorScale(d.x)})
+                .append("svg:title")
+                .text(function(d) { return d.x; });;
 
 
 
