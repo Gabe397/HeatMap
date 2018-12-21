@@ -33,6 +33,7 @@ h2{
     height: 100px;
     width: 600px;
     background-image: linear-gradient(to right, red , blue);
+    border: solid black 3px;
 }
 
 #header{
